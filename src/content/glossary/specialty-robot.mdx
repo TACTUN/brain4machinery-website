@@ -1,0 +1,86 @@
+---
+title: "What is a specialty robot? Definition, examples and control needs"
+description: "A specialty robot is a purpose-built machine that delivers one outcome with little human input: an existing machine made autonomous, or an automated service."
+publishedDate: 2026-10-06
+author: "Rafayel Ghasabyan"
+draft: true
+canonical: "https://brain4machinery.com/glossary/specialty-robot/"
+primaryKeyword: "what is a specialty robot"
+secondaryKeywords:
+  - "specialty robot definition"
+  - "field robot vs service robot"
+  - "purpose-built robot vs humanoid"
+  - "autonomous machinery retrofit"
+jsonLdType: "DefinedTerm"
+term: "Specialty robot"
+relatedTerms:
+  - "Field robot"
+  - "Professional service robot"
+  - "AI-native controller"
+  - "Retrofit autonomy"
+tlDr: >-
+  A specialty robot is a purpose-built physical system that converts energy
+  into one kind of valuable outcome with little or no human intervention. It
+  forms in one of two ways: an existing machine becomes autonomous (excavators,
+  energy assets, medical and laboratory equipment), or a service performed by
+  people becomes a robot system (cleaning, inspection, maintenance, agriculture).
+faq:
+  - q: "What is a specialty robot?"
+    a: "A specialty robot is a physical system built for one domain that converts energy into a valuable outcome with little or no human intervention. Form factor is secondary: it can be a tracked excavator, a panel-cleaning cart, an inspection crawler or a laboratory machine. The term covers both existing machines that gain autonomy and services that become robot-delivered."
+  - q: "How is a specialty robot different from an industrial robot?"
+    a: "An industrial robot is typically a programmable manipulator arm working in a structured factory cell, covered by safety standards such as ISO 10218. A specialty robot is purpose-built for a specific domain, is often mobile, and usually operates in unstructured environments: job sites, farms, energy assets, buildings or labs."
+  - q: "Is a humanoid robot a specialty robot?"
+    a: "No. A humanoid is a general-purpose form designed to use human tools and spaces. A specialty robot is shaped by its task. For many industrial jobs, a purpose-built machine avoids the energy a humanoid spends on balance and locomotion; humanoids in 2026 typically carry around 2–2.5 kWh of battery for roughly 2–5 hours of work."
+  - q: "What are examples of specialty robots?"
+    a: "Autonomous excavators and loaders, solar-panel cleaning robots, pipeline and tank inspection robots, autonomous agricultural implements, bricklaying machines, surgical and medical robots, and materials testing machines that set up and run tests with minimal operator input."
+  - q: "What control electronics does a specialty robot need?"
+    a: "Two domains in one architecture: GPU-class compute for perception and planning (for example NVIDIA Jetson Orin), and deterministic real-time control for motors, I/O timing, watchdogs and safety interlocks (typically an FPGA or a safety MCU). The control side is galvanically isolated from the power stage and designed for the field environment: temperature, vibration, EMC and ingress."
+  - q: "Why are specialty robots hard to build at low volume?"
+    a: "Volumes per vertical are often in the hundreds or low thousands of units. That is too many for developer kits, which are not intended for production, and usually too few to justify a fully custom in-house electronics program, which typically costs $900K–$2M+ and takes 18–24 months to reach a production-ready controller."
+---
+
+## Definition
+
+A **specialty robot** is a physical system, built for one domain, that converts energy into a valuable outcome with little or no human intervention. Its form follows its task. What defines it is the outcome it delivers and how little a person has to do to get it, not whether it has arms, legs or a face.
+
+The term overlaps with two established ones:
+
+- **Field robot** emphasizes outdoor, unstructured environments: farms, mines, construction sites, energy assets.
+- **Professional service robot** is the International Federation of Robotics (IFR) category for robots that perform useful tasks for professionals outside classic industrial automation. The IFR counted almost 200,000 professional service robots sold in 2024, up 9% year on year.
+
+"Specialty robot" is the umbrella for both. It also covers existing machines that gain autonomy wherever they operate, including laboratories.
+
+## Two ways specialty robots form
+
+| Path | What changes | Examples |
+|---|---|---|
+| **Machine → autonomous** | An existing machine class gains perception, planning and autonomy, often through a retrofit | Excavators and loaders, oil wells, wind turbines, solar assets, medical equipment, materials testing machines |
+| **Service → robot system** | Work done by people becomes a robot-delivered service | Cleaning, inspection and maintenance, agriculture, vehicle service, commercial building operations |
+
+The first path usually starts from a machine that already has actuators and a control loop. What gets added is perception, decision-making, and a control system that can safely accept commands from an AI stack. Retrofit autonomy kits for excavators are a current example. The second path starts from a task and designs the machine around it. Professional cleaning robots, a category that grew 34% in 2024 according to the IFR, are an example.
+
+## Specialty robots, industrial robots and humanoids
+
+| | Industrial robot | Humanoid | Specialty robot |
+|---|---|---|---|
+| Typical form | Fixed manipulator arm | General-purpose human form | Shaped by one task |
+| Environment | Structured factory cell | Spaces and tools built for people | Field, site, facility or lab; often unstructured |
+| Main strength | Mature supply chain and standards (ISO 10218) | Reuses existing human tools and spaces | Efficiency and throughput for its task |
+| Main constraint | Needs a structured environment | Energy and runtime (typically ~2–2.5 kWh, 2–5 h), reliability | Small volume per vertical, long sales cycles, machine-specific electronics |
+
+## What the control stack needs
+
+Specialty robots share a control problem regardless of form. Perception and planning need GPU-class compute. Actuators, I/O timing and safety interlocks need deterministic real-time control. Production designs separate the two:
+
+- **The brain:** AI compute, for example an NVIDIA Jetson Orin module, for perception, planning and on-device inference.
+- **The spine:** deterministic control, typically an FPGA or a safety MCU, for motor control, encoder and sensor timing, watchdogs and safety logic. It is galvanically isolated from the motor and power domain.
+
+The environment adds requirements that developer kits do not meet: wide-temperature operation, vibration and shock, EMC immunity next to motor inverters, protection against battery transients, and ingress protection. See [control electronics for field robots](/blog/control-electronics-for-field-robots/) for the full list with standards, and [ISO 13849 for robotic machinery](/glossary/iso-13849-for-robotic-machinery/) for safety partitioning.
+
+Because volumes per vertical are often in the hundreds or low thousands of units, most specialty robots fall into the gap where developer kits are no longer adequate and a fully custom in-house electronics program rarely pays back. [Build vs buy](/blog/build-vs-buy-robotics-controller/) walks through that decision.
+
+## How TACTUN fits
+
+TACTUN designs the control spine for specialty robots: an [AI-native controller](/glossary/ai-native-controller-primer/) that pairs FPGA real-time control with NVIDIA Jetson compute, on a board configured to each machine's sensors, actuators and environment. Board architecture is designed in 5 business days. Physical prototypes take 3–5 months through standard contract manufacturing. NRE is $0, and customers pay only for production hardware. The founding team has shipped 800+ controllers.
+
+[Tell us about your machine →](/contact/)
