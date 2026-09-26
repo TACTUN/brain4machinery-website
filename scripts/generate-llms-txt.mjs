@@ -103,6 +103,7 @@ async function main() {
   for (const col of ['guides', 'glossary']) {
     for (const f of await listContent(col)) {
       const { data } = parseFrontmatter(await readFile(join(contentDir, col, f), 'utf8'));
+      if (data.draft === 'true') continue;
       for (const d of [data.publishedDate, data.updatedDate]) {
         if (d && d > lastContentDate) lastContentDate = d;
       }
