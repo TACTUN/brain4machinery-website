@@ -1,6 +1,6 @@
 # TACTUN — brain4machinery.com — Full content snapshot
 
-Auto-generated. For citation by LLMs. Last content update: 2026-06-06
+Auto-generated. For citation by LLMs. Last content update: 2026-09-28
 
 ---
 url: https://brain4machinery.com/guides/custom-jetson-carrier-board-design/
@@ -1007,4 +1007,56 @@ With 14 years of systems integration experience, the team understands what certi
 ---
 
 Ready to discuss safety architecture for your machine? [Start a conversation](/contact/) — we can work through the risk assessment, the SRP/CS boundary placement, and the documentation path to CE or other market conformance.
+
+---
+url: https://brain4machinery.com/glossary/specialty-robot/
+title: What is a specialty robot? Definition, examples and control needs
+description: A specialty robot is a purpose-built machine that delivers one outcome with little human input: an existing machine made autonomous, or an automated service.
+---
+
+## Definition
+
+A **specialty robot** is a physical system, built for one domain, that converts energy into a valuable outcome with little or no human intervention. Its form follows its task. What defines it is the outcome it delivers and how little a person has to do to get it, not whether it has arms, legs or a face.
+
+The term overlaps with two established ones:
+
+- **Field robot** emphasizes outdoor, unstructured environments: farms, mines, construction sites, energy assets.
+- **Professional service robot** is the International Federation of Robotics (IFR) category for robots that perform useful tasks for professionals outside classic industrial automation. The IFR counted almost 200,000 professional service robots sold in 2024, up 9% year on year.
+
+"Specialty robot" is the umbrella for both. It also covers existing machines that gain autonomy wherever they operate, including laboratories.
+
+## Two ways specialty robots form
+
+| Path | What changes | Examples |
+|---|---|---|
+| **Machine → autonomous** | An existing machine class gains perception, planning and autonomy, often through a retrofit | Excavators and loaders, oil wells, wind turbines, solar assets, medical equipment, materials testing machines |
+| **Service → robot system** | Work done by people becomes a robot-delivered service | Cleaning, inspection and maintenance, agriculture, vehicle service, commercial building operations |
+
+The first path usually starts from a machine that already has actuators and a control loop. What gets added is perception, decision-making, and a control system that can safely accept commands from an AI stack. Retrofit autonomy kits for excavators are a current example. The second path starts from a task and designs the machine around it. Professional cleaning robots, a category that grew 34% in 2024 according to the IFR, are an example.
+
+## Specialty robots, industrial robots and humanoids
+
+| | Industrial robot | Humanoid | Specialty robot |
+|---|---|---|---|
+| Typical form | Fixed manipulator arm | General-purpose human form | Shaped by one task |
+| Environment | Structured factory cell | Spaces and tools built for people | Field, site, facility or lab; often unstructured |
+| Main strength | Mature supply chain and standards (ISO 10218) | Reuses existing human tools and spaces | Efficiency and throughput for its task |
+| Main constraint | Needs a structured environment | Energy and runtime (typically ~2–2.5 kWh, 2–5 h), reliability | Small volume per vertical, long sales cycles, machine-specific electronics |
+
+## What the control stack needs
+
+Specialty robots share a control problem regardless of form. Perception and planning need GPU-class compute. Actuators, I/O timing and safety interlocks need deterministic real-time control. Production designs separate the two:
+
+- **The brain:** AI compute, for example an NVIDIA Jetson Orin module, for perception, planning and on-device inference.
+- **The spine:** deterministic control, typically an FPGA or a safety MCU, for motor control, encoder and sensor timing, watchdogs and safety logic. It is galvanically isolated from the motor and power domain.
+
+The environment adds requirements that developer kits do not meet: wide-temperature operation, vibration and shock, EMC immunity next to motor inverters, protection against battery transients, and ingress protection. See [control electronics for field robots](/blog/control-electronics-for-field-robots/) for the full list with standards, and [ISO 13849 for robotic machinery](/glossary/iso-13849-for-robotic-machinery/) for safety partitioning.
+
+Because volumes per vertical are often in the hundreds or low thousands of units, most specialty robots fall into the gap where developer kits are no longer adequate and a fully custom in-house electronics program rarely pays back. [Build vs buy](/blog/build-vs-buy-robotics-controller/) walks through that decision.
+
+## How TACTUN fits
+
+TACTUN designs the control spine for specialty robots: an [AI-native controller](/glossary/ai-native-controller-primer/) that pairs FPGA real-time control with NVIDIA Jetson compute, on a board configured to each machine's sensors, actuators and environment. Board architecture is designed in 5 business days. Physical prototypes take 3–5 months through standard contract manufacturing. NRE is $0, and customers pay only for production hardware. The founding team has shipped 800+ controllers.
+
+[Tell us about your machine →](/contact/)
 
