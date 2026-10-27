@@ -17,7 +17,7 @@ Content lives in `src/content/<collection>/*.mdx`. Static pages live in `src/pag
 
 ## Routine tasks
 
-- Add a blog post: write `src/content/blog/<slug>.mdx` with the frontmatter from `src/content/config.ts`.
+- Add a blog post: write `src/content/blog/<slug>.mdx` with the frontmatter from `src/content.config.ts`.
 - Add a glossary entry: same, in `src/content/glossary/`.
 - Add a new page: create `src/pages/<name>.astro`, wrap content in `<BaseLayout>`.
 - Regenerate `llms.txt` after content changes: `npm run build:llms`.

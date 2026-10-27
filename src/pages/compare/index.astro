@@ -39,7 +39,7 @@ try {
       ) : (
         <div class="grid grid--2">
           {comparisons.map((entry) => (
-            <a href={`/compare/${entry.slug}/`} class="card" style="text-decoration: none; display: block;">
+            <a href={`/compare/${entry.id}/`} class="card" style="text-decoration: none; display: block;">
               <h3 class="card__title" style="font-size: 1.25rem;">{entry.data.title}</h3>
               <p class="card__text" style="margin-top: 0.5rem;">{entry.data.description}</p>
               <p class="text-muted" style="font-size: 0.8125rem; margin-top: 0.75rem;">

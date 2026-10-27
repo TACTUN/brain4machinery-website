@@ -1,6 +1,7 @@
 import { defineConfig } from 'astro/config';
 import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
+import { unified } from '@astrojs/markdown-remark';
 import rehypeMermaid from 'rehype-mermaid';
 import { readdirSync, readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
@@ -107,17 +108,23 @@ export default defineConfig({
   build: {
     format: 'directory',
   },
+  // Astro 7 defaults to 'jsx' whitespace rules, which strip spaces between
+  // inline elements; keep the v5 behaviour so existing copy renders unchanged.
+  compressHTML: true,
   markdown: {
+    // Astro 7's default Sätteri processor does not run rehype plugins;
+    // rehype-mermaid needs the unified (remark/rehype) pipeline. MDX inherits
+    // this processor, so the plugins apply to .md and .mdx alike.
+    processor: unified({
+      rehypePlugins: [[rehypeMermaid, mermaidOptions], rehypeMermaidScroll],
+    }),
     syntaxHighlight: {
       type: 'shiki',
       excludeLangs: ['mermaid'],
     },
-    rehypePlugins: [[rehypeMermaid, mermaidOptions], rehypeMermaidScroll],
   },
   integrations: [
-    mdx({
-      rehypePlugins: [[rehypeMermaid, mermaidOptions], rehypeMermaidScroll],
-    }),
+    mdx(),
     sitemap({
       changefreq: 'weekly',
       priority: 0.7,

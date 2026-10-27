@@ -30,7 +30,7 @@ const guides = (await getCollection('guides', ({ data }) => !data.draft)).sort(
       ) : (
         <div class="grid grid--2">
           {guides.map((guide) => (
-            <a href={`/guides/${guide.slug}/`} class="card" style="text-decoration: none; display: block;">
+            <a href={`/guides/${guide.id}/`} class="card" style="text-decoration: none; display: block;">
               <h3 class="card__title" style="font-size: 1.25rem;">{guide.data.title}</h3>
               <p class="card__text" style="margin-top: 0.5rem;">{guide.data.description}</p>
               <p class="text-muted" style="font-size: 0.8125rem; margin-top: 0.75rem;">

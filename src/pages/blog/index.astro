@@ -30,7 +30,7 @@ const posts = (await getCollection('blog', ({ data }) => !data.draft)).sort(
       ) : (
         <div class="grid grid--2">
           {posts.map((post) => (
-            <a href={`/blog/${post.slug}/`} class="card" style="text-decoration: none; display: block;">
+            <a href={`/blog/${post.id}/`} class="card" style="text-decoration: none; display: block;">
               <h3 class="card__title" style="font-size: 1.25rem;">{post.data.title}</h3>
               <p class="card__text" style="margin-top: 0.5rem;">{post.data.description}</p>
               <p class="text-muted" style="font-size: 0.8125rem; margin-top: 0.75rem;">

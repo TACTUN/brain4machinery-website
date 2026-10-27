@@ -17,7 +17,7 @@ jobs:
       - uses: actions/checkout@v5
       - uses: actions/setup-node@v5
         with:
-          node-version: '20'
+          node-version: '24'
       - name: Regenerate llms.txt and llms-full.txt
         run: node scripts/generate-llms-txt.mjs
       - name: Open PR if changed
