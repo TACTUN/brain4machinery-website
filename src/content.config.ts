@@ -1,4 +1,9 @@
-import { defineCollection, z } from 'astro:content';
+import { defineCollection } from 'astro:content';
+import { glob } from 'astro/loaders';
+import { z } from 'astro/zod';
+
+// Each collection reads src/content/<name>/*.md(x); the file name is the entry id.
+const mdx = (name: string) => glob({ pattern: '**/[^_]*.{md,mdx}', base: `./src/content/${name}` });
 
 const baseFields = {
   title: z.string().max(70),
@@ -7,7 +12,7 @@ const baseFields = {
   updatedDate: z.date().optional(),
   author: z.string().default('Rafayel Ghasabyan'),
   draft: z.boolean().default(false),
-  canonical: z.string().url().optional(),
+  canonical: z.url().optional(),
   primaryKeyword: z.string(),
   secondaryKeywords: z.array(z.string()).default([]),
   tlDr: z.string().min(40).max(400).optional(),
@@ -22,7 +27,7 @@ const baseFields = {
 };
 
 const blog = defineCollection({
-  type: 'content',
+  loader: mdx('blog'),
   schema: z.object({
     ...baseFields,
     jsonLdType: z.enum(['BlogPosting', 'TechArticle']).default('BlogPosting'),
@@ -32,7 +37,7 @@ const blog = defineCollection({
 });
 
 const guides = defineCollection({
-  type: 'content',
+  loader: mdx('guides'),
   schema: z.object({
     ...baseFields,
     jsonLdType: z.enum(['TechArticle', 'HowTo']).default('TechArticle'),
@@ -42,7 +47,7 @@ const guides = defineCollection({
 });
 
 const glossary = defineCollection({
-  type: 'content',
+  loader: mdx('glossary'),
   schema: z.object({
     ...baseFields,
     jsonLdType: z.enum(['DefinedTerm']).default('DefinedTerm'),
@@ -52,7 +57,7 @@ const glossary = defineCollection({
 });
 
 const compare = defineCollection({
-  type: 'content',
+  loader: mdx('compare'),
   schema: z.object({
     ...baseFields,
     jsonLdType: z.enum(['Article']).default('Article'),
@@ -61,7 +66,7 @@ const compare = defineCollection({
         z.object({
           name: z.string(),
           vendor: z.string(),
-          url: z.string().url().optional(),
+          url: z.url().optional(),
         })
       )
       .min(2),
@@ -69,7 +74,7 @@ const compare = defineCollection({
 });
 
 const useCases = defineCollection({
-  type: 'content',
+  loader: mdx('use-cases'),
   schema: z.object({
     ...baseFields,
     jsonLdType: z.enum(['Article']).default('Article'),
@@ -79,7 +84,7 @@ const useCases = defineCollection({
 });
 
 const news = defineCollection({
-  type: 'content',
+  loader: mdx('news'),
   schema: z.object({
     ...baseFields,
     jsonLdType: z.enum(['NewsArticle']).default('NewsArticle'),

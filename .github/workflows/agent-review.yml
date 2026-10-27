@@ -75,7 +75,7 @@ jobs:
           Approve only changes that are correct and safe to ship to production automatically.
 
           Hard rules to enforce (REQUEST_CHANGES if violated):
-          - Content frontmatter MUST satisfy src/content/config.ts. Common traps:
+          - Content frontmatter MUST satisfy src/content.config.ts. Common traps:
             * title <= 70 chars; description <= 160; tlDr 40-400 if present.
             * guides jsonLdType must be TechArticle or HowTo (NOT "Article").
             * blog jsonLdType must be BlogPosting or TechArticle.

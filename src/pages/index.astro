@@ -205,7 +205,7 @@ const collectionLabel: Record<string, string> = {
         </div>
         <div class="grid grid--3 fade-in">
           {latestInsights.map((post) => (
-            <a href={`/${post.collection}/${post.slug}/`} class="card" style="text-decoration: none; display: block;">
+            <a href={`/${post.collection}/${post.id}/`} class="card" style="text-decoration: none; display: block;">
               <span class="label" style="font-size: 0.75rem;">{collectionLabel[post.collection]}</span>
               <h3 class="card__title" style="font-size: 1.125rem; margin-top: 0.625rem; line-height: 1.35;">{post.data.title}</h3>
               <p class="card__text" style="margin-top: 0.625rem;">{post.data.description}</p>

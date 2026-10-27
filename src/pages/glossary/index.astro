@@ -30,7 +30,7 @@ const entries = (await getCollection('glossary', ({ data }) => !data.draft)).sor
       ) : (
         <div class="grid grid--2">
           {entries.map((entry) => (
-            <a href={`/glossary/${entry.slug}/`} class="card" style="text-decoration: none; display: block;">
+            <a href={`/glossary/${entry.id}/`} class="card" style="text-decoration: none; display: block;">
               <h3 class="card__title" style="font-size: 1.25rem;">{entry.data.term}</h3>
               <p class="card__text" style="margin-top: 0.5rem;">{entry.data.description}</p>
               {entry.data.relatedTerms.length > 0 && (
